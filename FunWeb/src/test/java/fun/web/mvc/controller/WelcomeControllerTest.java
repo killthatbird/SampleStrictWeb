@@ -25,8 +25,8 @@ public class WelcomeControllerTest {
   @Test
   public final void testDoGet() {
     final WelcomeController controller = new WelcomeController();
-    controller.doGet();
-    Assert.assertNotNull("Welcome Controller should not be null", controller);
+    final String retval = controller.doGet();
+    Assert.assertNotNull("Do Get Retval should not be null", retval);
 
   }
 
