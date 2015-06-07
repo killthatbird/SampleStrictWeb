@@ -1,0 +1,14 @@
+
+includeFlat "FunDomain"
+/*includeFlat "FunData"*/
+includeFlat "FunWeb"
+
+
+
+
+
+project(":FunDomain").projectDir = file("../FunDomain")
+
+/*project(":FunData").projectDir = file("../FunData")*/
+
+project(":FunWeb").projectDir = file("../FunWeb")

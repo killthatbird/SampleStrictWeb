@@ -1,0 +1,213 @@
+
+allprojects {
+  
+  apply plugin: 'eclipse'
+  apply plugin: 'jacoco'
+    
+  repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+      group = 'com.fun'
+      version = '0.1'
+      
+      jacoco {
+        toolVersion = "0.7.1.201405082137"
+    }
+      
+  }
+
+
+def langLevel = 1.8
+
+
+subprojects {
+
+    
+  apply plugin: 'java'
+  apply plugin: 'groovy'
+  apply plugin: 'findbugs'
+  apply plugin: 'pmd'
+  apply plugin: 'checkstyle'
+  
+
+    sourceCompatibility = langLevel
+    targetCompatibility = langLevel
+
+    gradle.projectsEvaluated {
+      tasks.withType(JavaCompile) {
+          options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+      }
+  }
+
+    dependencies {
+        compile 'org.codehaus.groovy:groovy-all:2.3.10'
+        testCompile 'org.spockframework:spock-core:1.0-groovy-2.3'
+        testCompile group: 'junit', name: 'junit', version: '4.+'
+        testCompile "org.mockito:mockito-core:1.+"
+    }
+    
+    sourceSets {
+      main {
+         java {
+            srcDir 'src/main/java'
+         }
+         groovy {
+           srcDir 'src/main/groovy'
+        }
+      }
+      test {
+         java {
+            srcDir 'src/test/java'
+         }
+         groovy {
+            srcDir 'src/test/groovy'
+         }
+      }
+    }
+    
+    findbugs {
+      ignoreFailures = true
+      sourceSets = [sourceSets.main,sourceSets.test]
+      reportsDir = file("$project.buildDir/reports/findbugs")
+      toolVersion = '3.0.1'
+      effort = "max"
+      reportLevel = "low"
+    }
+     
+    pmd {
+      ignoreFailures = true
+      sourceSets = [sourceSets.main,sourceSets.test]
+      reportsDir = file("$project.buildDir/reports/pmd")
+      toolVersion = '5.1.2'
+        ruleSets = [
+                'java-android',
+                'java-basic',
+                'java-braces',
+                'java-clone',
+                'java-codesize',
+                'java-comments',
+                'java-controversial',
+                'java-design',
+                'java-empty',
+                'java-finalizers',
+                'java-imports',
+                'java-j2ee',
+                'java-javabeans',
+                'java-junit',
+                'java-logging-jakarta-commons',
+                'java-logging-java',
+                'java-migrating',
+                'java-naming',
+                'java-optimizations',
+                'java-strictexception',
+                'java-strings',
+                'java-sunsecure',
+                'java-typeresolution',
+                'java-unnecessary',
+                'java-unusedcode',
+                'java-coupling'
+                ]
+    }
+    check << {
+      File outDir = new File('build/reports/pmd/')
+      outDir.mkdirs()
+      ant.taskdef(name: 'cpd', classname: 'net.sourceforge.pmd.cpd.CPDTask',
+        classpath: configurations.pmd.asPath)
+      ant.cpd(minimumTokenCount: '100', format: 'xml',
+        outputFile: new File(outDir , 'cpd.xml')) {
+        fileset(dir: "src/main/java") {
+          include(name: '**/*.java')
+        }
+      }
+    }
+    
+    
+    checkstyle {
+        ignoreFailures = true
+        toolVersion = "6.7"
+        sourceSets = [sourceSets.main,sourceSets.test]
+        configFile = new File(rootDir, "config/checkstyle.xml")
+        reportsDir = file("$project.buildDir/reports/checkstyle")
+    }
+    
+    
+    jacocoTestReport {
+      additionalSourceDirs = files(sourceSets.main.allSource.srcDirs)
+      sourceDirectories = files(sourceSets.main.allSource.srcDirs)
+      classDirectories =  files(sourceSets.main.output)
+      reports {
+          html.enabled = true
+          xml.enabled = true
+          csv.enabled = false
+      }
+  }
+    
+}
+
+
+/*project(':FunData') {
+  
+      dependencies {
+          compile 'org.hibernate:hibernate-core:4.1.7.Final'
+          compile project(':FunDomain')
+      }
+  }*/
+  
+  project(':FunDomain') {
+  
+      dependencies {
+        compile group: 'commons-collections', name: 'commons-collections', version: '3.+'
+        compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.+'
+      }
+      
+      
+      
+  }
+  
+  project(':FunWeb') {
+  
+      apply plugin: 'war'
+      apply plugin: 'eclipse-wtp'
+  
+      dependencies {
+          compile project(':FunDomain')
+          //Un Comment when data project not empty
+          //compile project(':FunData')
+          compile 'javax.servlet.jsp.jstl:jstl-api:1.2'
+          providedCompile group: 'javax.servlet', name: 'javax.servlet-api' , version: '3.1.0'
+          compile 'org.springframework:spring-webmvc:4.1.6.RELEASE'
+          testCompile 'org.springframework:spring-test:4.1.6.RELEASE'
+      }
+  }
+  
+  
+  
+  
+  task jacocoRootReport(type: org.gradle.testing.jacoco.tasks.JacocoReport) {
+    dependsOn = subprojects.test
+    additionalSourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs)
+    sourceDirectories = files(subprojects.sourceSets.main.allSource.srcDirs)
+    classDirectories = files(subprojects.sourceSets.main.output)
+    executionData = files(subprojects.jacocoTestReport.executionData)
+    reports {
+        html.enabled = true
+        xml.enabled = true
+        csv.enabled = false
+    }
+    onlyIf = {
+        true
+    }
+    doFirst {
+        executionData = files(executionData.findAll {
+            it.exists()
+        })
+    }
+}
+  
+  
+  
+  task wrapper(type: Wrapper) {
+      gradleVersion = '2.4'
+  }
