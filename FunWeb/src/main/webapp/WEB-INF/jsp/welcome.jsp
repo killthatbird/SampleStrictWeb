@@ -2,6 +2,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<meta name="description" content="Base Project">
+<meta name="keywords" content="HTML,CSS,XML,JavaScript">
 <link rel="stylesheet" href = "common/css/bootstrap.min.css">
 <script src= "common/js/angular.min.js"></script>
 <script src= "common/js/bootstrap.min.js"></script>
@@ -11,7 +14,7 @@
 <body>
 <div data-ng-app="">
   <p>Name : <input type="text" data-ng-model="name"></p>
-  <h1>Hello {{name}}</h1>
+  <h1>Hello <span data-ng-bind="name"></span></h1>
 </div>
 <button class="btn btn-success" data-ng-click="editUser('new')"><span class="glyphicon glyphicon-user"></span>  Create New User
 </button>
