@@ -30,6 +30,7 @@ subprojects {
   apply plugin: 'findbugs'
   apply plugin: 'pmd'
   apply plugin: 'checkstyle'
+  apply plugin: 'sonar'
   
 
     sourceCompatibility = langLevel
@@ -160,6 +161,9 @@ subprojects {
       dependencies {
         compile group: 'commons-collections', name: 'commons-collections', version: '3.+'
         compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.+'
+        compile 'com.fasterxml.jackson.core:jackson-core:2.+'
+        compile 'com.fasterxml.jackson.core:jackson-databind:2.+'
+        compile 'com.fasterxml.jackson.core:jackson-annotations:2.+'
       }
       
       
@@ -177,8 +181,14 @@ subprojects {
           //compile project(':FunData')
           compile 'javax.servlet.jsp.jstl:jstl-api:1.2'
           providedCompile group: 'javax.servlet', name: 'javax.servlet-api' , version: '3.1.0'
+          compile group: 'commons-collections', name: 'commons-collections', version: '3.+'
+          compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.+'
           compile 'org.springframework:spring-webmvc:4.1.6.RELEASE'
           testCompile 'org.springframework:spring-test:4.1.6.RELEASE'
+          compile 'com.fasterxml.jackson.core:jackson-core:2.+'
+          compile 'com.fasterxml.jackson.core:jackson-databind:2.+'
+          compile 'com.fasterxml.jackson.core:jackson-annotations:2.+'
+         
       }
   }
   

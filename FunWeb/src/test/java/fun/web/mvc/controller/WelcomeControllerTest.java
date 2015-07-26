@@ -7,7 +7,7 @@ import org.junit.Test;
 
 /**
  * Welcome Controller Test.
- * @author I have no name
+ * @author Open Source
  *
  */
 public class WelcomeControllerTest {

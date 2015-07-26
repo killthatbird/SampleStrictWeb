@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 /**
  * Utility Class for constructors.
  *
- * @author I have no name
+ * @author Open Source
  *
  */
 public final class ConstructorUtil {
@@ -72,6 +72,13 @@ public final class ConstructorUtil {
     if (clazz != null && LOG.isLoggable(Level.FINEST)) {
       LOG.finest(clazz.getName() + "instance created.");
     }
+  }
+
+  /**
+   * Does nothing.
+   */
+  public static void noOp() {
+    //NoOp for silencing some strange pmd warnings.
   }
 
   private static void setAccessible(final Constructor<?> constructor, final boolean value) {

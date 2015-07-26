@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 
 /**
  * Test Class for Configuration.
- * @author I have no name
+ * @author Open source
  *
  */
 public class ServletConfigTest {

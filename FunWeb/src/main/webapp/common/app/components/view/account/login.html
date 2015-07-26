@@ -1,0 +1,46 @@
+<div id="mainDiv"  data-ng-controller="loginController" data-ng-init="initializeController()">
+  
+  <div style="padding-top:20px">
+            <alert data-ng-repeat="alert in alerts" data-type="{{alert.type}}" data-close="closeAlert($index)"><div data-ng-bind-html="MessageBox"></div></alert>
+  </div>
+  
+  
+  <form name="mainForm" data-ng-submit="processForm()" role="form" method="POST" novalidate>
+  <h2>Login:</h2>
+  <br/>
+  
+  <table>
+  	<thead/>
+  	<tbody>
+  		<tr>
+  			<td>
+  				<label for="userName" data-required = "true" >User Name:&nbsp;</label>
+  			</td>
+  			<td>
+  				<input type="text" name = "userName" data-ng-model ="appForm.userName" />
+  			</td>
+  		</tr>
+  		<tr>
+  			<td>
+  				<br/>
+  			</td>
+  		</tr>
+  		<tr>
+  			<td>
+  				<label for="password" data-required="true" >Password:&nbsp;</label>
+  			</td>
+  			<td>
+				<input type="password" name = "password" data-ng-model="appForm.password" />
+  			</td>
+  		</tr>
+  		<tr>
+  			<td>
+  				&nbsp;<input type ="submit" class="btn btn-success" value="Login">
+  			</td>
+  		</tr>
+  </tbody>
+  </table>
+  <br/>
+
+</form>
+</div>

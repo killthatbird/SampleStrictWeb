@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Home Page.
- * @author I have no name
+ * @author Open Source
  *
  */
 @Controller
@@ -26,6 +26,6 @@ public class WelcomeController {
    */
   @RequestMapping("/")
   public String doGet() {
-    return "welcome";
+    return "components/view/login/welcome.html";
   }
 }

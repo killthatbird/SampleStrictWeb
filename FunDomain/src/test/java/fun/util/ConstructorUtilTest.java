@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 /**
  * Test Class.
  *
- * @author I have no name
+ * @author Open Source
  *
  */
 public class ConstructorUtilTest {
@@ -45,6 +45,15 @@ public class ConstructorUtilTest {
     ConstructorUtil.setLogLevel(logger, Level.FINEST);
     ConstructorUtil.logInstanceCreation(ConstructorUtilTest.class);
     Assert.assertNotNull("logger should not be null.", logger);
+  }
+
+  /**
+   * Test no operation.
+   */
+  @Test
+  public final void testNoOp() {
+    ConstructorUtil.noOp();
+    Assert.assertNotNull(ConstructorUtil.class);
   }
 
 }
