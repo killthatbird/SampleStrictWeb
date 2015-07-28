@@ -3,6 +3,7 @@ package fun.web.mvc.common;
 import fun.util.ConstructorUtil;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.support.WebBindingInitializer;
 
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import java.util.Locale;
  * @author Open Source
  *
  */
+@ControllerAdvice
 public class BindingInitializer implements WebBindingInitializer {
 
   /**

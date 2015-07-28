@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
  * @author None
  *
  */
+
 public final class WebInitializer implements org.springframework.web.WebApplicationInitializer {
 
   /**

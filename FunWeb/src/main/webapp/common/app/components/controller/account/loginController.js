@@ -33,7 +33,7 @@ define(['application-configuration', 'accountService', 'alertService'], function
             	var validationErrors = response.allErrors;
                 if(validationErrors !=null && validationErrors.length>0){
                 	for(var i = 0;i<validationErrors.length;i++){
-                		 alertService.RenderWarningMessage(validationErrors[i].codes[0]);
+                		 alertService.RenderWarningMessage(validationErrors[i].code);
                 	}
                 }else{
                 	$rootScope.account = response;

@@ -1,7 +1,6 @@
 package fun.config;
 
 import fun.util.ConstructorUtil;
-import fun.web.mvc.common.BindingInitializer;
 import fun.web.mvc.interceptor.ApplicationInterceptor;
 
 import org.springframework.context.annotation.Bean;
@@ -9,7 +8,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.bind.support.WebBindingInitializer;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -72,15 +70,6 @@ public class ServletConfig extends WebMvcConfigurerAdapter {
     addResouceLocations(registration);
     setCachePeriod(registration);
 
-  }
-
-  /**
-   * Configure Binding Initializer.
-   * @return initializer
-   */
-  @Bean
-  public WebBindingInitializer bindingInitializer() {
-    return new BindingInitializer();
   }
 
   /**
